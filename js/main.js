@@ -195,13 +195,21 @@
             cropData.h * scale);
 
         //use ocrad.js to extract text from the canvas
+//        var resultText = OCRAD(ctx);
         var resultText = OCRAD(ctx);
-        resultText = resultText.trim();
-
-        //show the result
-        $('blockquote p').html('&bdquo;' + resultText + '&ldquo;');
-        $('blockquote footer').text('(' + resultText.length + ' characters)')
-    }
+        Tesseract
+          .recognize( img, {
+            progress: show_progress} )
+          .then( function(err,result) {
+      
+              resultText = result.text.trim();
+        
+                //show the result
+                $('blockquote p').html('&bdquo;' + resultText + '&ldquo;');
+                $('blockquote footer').text('(' + resultText.length + ' characters)');
+                $('result').html(result.html);
+            }
+          } ) 
 
     /*********************************
      * UI Stuff
