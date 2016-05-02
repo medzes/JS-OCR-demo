@@ -197,7 +197,7 @@
         //use ocrad.js to extract text from the canvas
 //        var resultText = OCRAD(ctx);
         Tesseract
-          .recognize( img,
+          .recognize( ctx,
          // { progress: show_progress},
            function(err,result) {
               resultText = result.text.trim();
